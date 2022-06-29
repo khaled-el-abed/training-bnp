@@ -11,10 +11,9 @@ import RxSwift
 
 final class MoviesListViewController: GenericTableViewController<MoviesViewModel, MovieCell> {
 
+    // MARK: - Public Properties
     
-    // MARK: - Private Properties
-    
-    var delegate: MoviesFlow?
+    weak var delegate: MoviesFlow?
     
     // MARK: - IBOutlets
     
@@ -25,7 +24,7 @@ final class MoviesListViewController: GenericTableViewController<MoviesViewModel
         }
     }
     
-    // MARK: - Initializations
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +38,7 @@ final class MoviesListViewController: GenericTableViewController<MoviesViewModel
         let nib = UINib(nibName: MovieCell.identifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: MovieCell.identifier)
         tableView.rx.setDelegate(self).disposed(by: disposeBag)
-        
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 150
     }
     
     private func setupBinding() {
@@ -53,20 +50,18 @@ final class MoviesListViewController: GenericTableViewController<MoviesViewModel
             
         tableView.rx.modelSelected(MovieViewModel.self).bind(to: viewModel.input.selectedMovie).disposed(by: disposeBag)
         
-        tableView.rx.modelSelected(MovieViewModel.self).subscribe(onNext: { selectedMovie in
-            print("**🔥**","SelectedItem: \(selectedMovie.movie.title)", self.delegate)
-            
-            self.delegate?.navigateToMovieDetails(movie: selectedMovie.movie)
+        tableView.rx.modelSelected(MovieViewModel.self).subscribe(onNext: { [weak self] selectedMovie in
+            self?.delegate?.navigateToMovieDetails(movie: selectedMovie.movie)
         }).disposed(by: disposeBag)
         
         // Called when apiClient or apiClientMock setted
-        viewModel?.reload.filter { $0 }.subscribe(onNext: { _ in
-            self.viewModel?.input.name.accept(nil)
+        viewModel?.reload.filter { $0 }.subscribe(onNext: { [weak self] _ in
+            self?.viewModel?.input.name.accept(nil)
         }).disposed(by: disposeBag)
-        
-        
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension MoviesListViewController: UITableViewDelegate {
     

@@ -10,9 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class MovieViewModel: Equatable {
-    
-    
-    
+
     // MARK: - Constants
     
     private enum Constants {
@@ -21,27 +19,25 @@ final class MovieViewModel: Equatable {
     
     // MARK: - Public Properties
     
+    private(set) var _title: BehaviorRelay<String?>
+    private(set) var _description: BehaviorRelay<String?>
+    private(set) var _poster: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
+    
     var title: Driver<String?> {
         _title.asDriver()
     }
     
-    private(set) var _title: BehaviorRelay<String?>
-    
     var description: Driver<String?> {
         _description.asDriver()
     }
-    
-    private(set) var _description: BehaviorRelay<String?>
-    
+
     var poster: Driver<URL?> {
         _poster.asDriver()
     }
     
     private(set) var movie: Movie
     
-    private(set) var _poster: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
-    
-    // MARK: - Init
+    // MARK: - Initialization
     
     init(movie: Movie) {
         self.movie = movie
@@ -58,5 +54,4 @@ final class MovieViewModel: Equatable {
     static func == (lhs: MovieViewModel, rhs: MovieViewModel) -> Bool {
         return lhs.movie.id == rhs.movie.id
     }
-    
 }

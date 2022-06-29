@@ -21,13 +21,8 @@ final class MovieDetailsViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    var viewModel: MovieDetailsViewModel! {
-        didSet {
-            
-        }
-    }
-    
-    var disposeBag: DisposeBag = DisposeBag()
+    var viewModel: MovieDetailsViewModel!
+    let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - IBOutlets
     
@@ -69,21 +64,23 @@ final class MovieDetailsViewController: UIViewController {
         viewModel.description.drive(descriptionLabel.rx.text).disposed(by: disposeBag)
         viewModel.date.drive(dateLabel.rx.text).disposed(by: disposeBag)
         
-        viewModel.poster.asObservable().subscribe(onNext: { poster in
+        viewModel.poster.asObservable().subscribe(onNext: { [weak self] poster in
+            guard let self = self else { return }
+            
             KF.url(poster)
                 .placeholder(UIImage(named: Constants.posterPlaceholder))
                 .loadDiskFileSynchronously()
                 .cacheMemoryOnly()
-                .fade(duration: 0.25)
                 .set(to: self.posterImageView)
         }).disposed(by: disposeBag)
         
-        viewModel.banner.asObservable().subscribe(onNext: { banner in
+        viewModel.banner.asObservable().subscribe(onNext: { [weak self] banner in
+            guard let self = self else { return }
+            
             KF.url(banner)
                 .loadDiskFileSynchronously()
                 .placeholder(UIImage(named: Constants.bannerPlaceholder))
                 .cacheMemoryOnly()
-                .fade(duration: 0.25)
                 .set(to: self.bannerImageView)
         }).disposed(by: disposeBag)
     }

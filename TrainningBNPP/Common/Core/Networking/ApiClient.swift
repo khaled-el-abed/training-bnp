@@ -8,6 +8,8 @@
 import Foundation
 import Swinject
 
+// MARK: - Provider
+
 protocol ApiClientProvider {
     
     var apiClient: Networking { get }
@@ -18,6 +20,8 @@ extension ApiClientProvider {
     var apiClient: Networking { Container.shared.resolve(Networking.self)! }
 }
 
+// MARK: - APIClient
+
 final class ApiClient: Networking {
     
     func execute<T: Decodable>(_ request: RequestProtocol,
@@ -27,8 +31,8 @@ final class ApiClient: Networking {
             
             DispatchQueue.main.async {
                 do {
-                    if let error = error as? BnpError {
-                        completion(.failure(error))
+                    if let _ = error {
+                        completion(.failure(.notFound))
                         return
                     }
                     
@@ -40,9 +44,7 @@ final class ApiClient: Networking {
                     
                     completion(.success(decodedObject))
                 } catch {
-                    guard  let error = error as? BnpError else { completion(.failure(.notFound))
-                        return }
-                    completion(.failure(error))
+                    completion(.failure(.notFound))
                 }
             }
         }.resume()

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		10415A12FC00C4DC7EE6AC2B /* Pods_TrainningBNPP_TrainningBNPPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23770F60003FBB6963F5387 /* Pods_TrainningBNPP_TrainningBNPPUITests.framework */; };
 		AD6DAB7D008A371010DF3B89 /* Pods_TrainningBNPP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC2BD39D5E243D641E00DFD3 /* Pods_TrainningBNPP.framework */; };
+		C12CA5E8286C0CDD0079CA24 /* MovieDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12CA5E7286C0CDD0079CA24 /* MovieDetailsCoordinator.swift */; };
 		C17956A12861F5120001F1EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17956A02861F5120001F1EC /* AppDelegate.swift */; };
 		C17956A32861F5120001F1EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17956A22861F5120001F1EC /* SceneDelegate.swift */; };
 		C17956AA2861F5130001F1EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C17956A92861F5130001F1EC /* Assets.xcassets */; };
@@ -82,6 +83,7 @@
 		23250FDA5F4EBCD7D1E0B545 /* Pods-TrainningBNPPTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainningBNPPTests.release.xcconfig"; path = "Target Support Files/Pods-TrainningBNPPTests/Pods-TrainningBNPPTests.release.xcconfig"; sourceTree = "<group>"; };
 		534725464C7A0BD7589FDC36 /* Pods-TrainningBNPP-TrainningBNPPUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainningBNPP-TrainningBNPPUITests.release.xcconfig"; path = "Target Support Files/Pods-TrainningBNPP-TrainningBNPPUITests/Pods-TrainningBNPP-TrainningBNPPUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B4676BBD8971F9D89FECA77C /* Pods-TrainningBNPP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrainningBNPP.release.xcconfig"; path = "Target Support Files/Pods-TrainningBNPP/Pods-TrainningBNPP.release.xcconfig"; sourceTree = "<group>"; };
+		C12CA5E7286C0CDD0079CA24 /* MovieDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsCoordinator.swift; sourceTree = "<group>"; };
 		C179569D2861F5120001F1EC /* TrainningBNPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainningBNPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17956A02861F5120001F1EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C17956A22861F5120001F1EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			children = (
 				C17A26FC286458EC001D0FEC /* MainCoordinator.swift */,
 				C17A26FE28645922001D0FEC /* MoviesCoordinator.swift */,
+				C12CA5E7286C0CDD0079CA24 /* MovieDetailsCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -767,6 +770,7 @@
 				C17956D9286211740001F1EC /* Router.swift in Sources */,
 				C19BAD64286355CE00E9DE08 /* MovieViewModel.swift in Sources */,
 				C17A270C286460F0001D0FEC /* MovieResponse.swift in Sources */,
+				C12CA5E8286C0CDD0079CA24 /* MovieDetailsCoordinator.swift in Sources */,
 				C19BAD60286353DD00E9DE08 /* MovieCell.swift in Sources */,
 				C19BAD4A2863088900E9DE08 /* Networking.swift in Sources */,
 				C19BAD66286357D200E9DE08 /* Setupable.swift in Sources */,

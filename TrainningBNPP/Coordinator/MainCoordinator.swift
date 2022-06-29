@@ -21,6 +21,8 @@ extension Coordinator {
 final class MainCoordinator: Coordinator {
     
     let navigationController = UINavigationController()
+    var mainCoordinator: Coordinator!
+    var onDismiss: (() -> Void)?
     
     // MARK: - Initialization
     
@@ -39,7 +41,7 @@ final class MainCoordinator: Coordinator {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         
-        let mainCoordinator = MoviesCoordinator(navigationController: navigationController)
+        mainCoordinator = MoviesCoordinator(navigationController: navigationController)
         coordinate(to: mainCoordinator)
     }
 }

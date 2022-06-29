@@ -12,7 +12,11 @@ protocol MoviesFlow: AnyObject {
 }
 
 final class MoviesCoordinator: Coordinator {
-
+    
+    // MARK: - Private Properties
+   
+    private let navigationController: UINavigationController
+    
     // MARK: - Initialization
     
     var childViewControlelr: [UIViewController] = []
@@ -21,14 +25,9 @@ final class MoviesCoordinator: Coordinator {
         self.navigationController = navigationController
     }
 
-    // MARK: - Private Properties
-   
-    private let navigationController: UINavigationController
-
     // MARK: - Public Methods
     
     func start() {
-        
         
         let viewController = MoviesListViewController()
         viewController.delegate = self
@@ -44,13 +43,7 @@ final class MoviesCoordinator: Coordinator {
 extension MoviesCoordinator: MoviesFlow {
 
     func navigateToMovieDetails(movie: Movie) {
-        let detailsViewController = MovieDetailsViewController()
-        let detailsViewModel = MovieDetailsViewModel(movie: movie)
-        detailsViewController.viewModel = detailsViewModel
-        
-        childViewControlelr.append(detailsViewController)
-        navigationController.pushViewController(detailsViewController, animated: true)
-        
-        //coordinate(to: detailsCoordinator)
+        let detailsCoordinator = MovieDetailsCoordinator(navigationController: navigationController, movie: movie)
+        coordinate(to: detailsCoordinator)
     }
 }

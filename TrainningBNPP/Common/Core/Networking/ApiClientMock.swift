@@ -21,6 +21,7 @@ final class ApiClientMock: Networking {
     func execute<T: Decodable>(_ request: RequestProtocol,
                                completion: @escaping (Result<T, BnpError>) -> Void) {
         
+        
         guard let file = getFileName(from: request),
               let result = getJson(from: file) else {
             
@@ -46,26 +47,25 @@ final class ApiClientMock: Networking {
               let fileName = url.absoluteString.components(separatedBy: Constants.urlSeparator).last,
               let file = fileName.components(separatedBy: Constants.extensionSeparator).first
         else {
-            
             return nil
         }
         
         /*
-        // Get All params
-        guard  let component = request.urlRequest.url?.components,
-               var queries = component.queryItems else {
-            return nil
-        }
-        
-        // TODO: - Remove unecessary params
-        let urlString = queries.reduce("") { text, query in "\(text)-\(query.name)-\(query.value!)"}.replacingOccurrences(of: " ", with: "-")
-        //          print("**🔥**", #function, urlString)
-        //file += urlString*/
+         // Get All params
+         guard  let component = request.urlRequest.url?.components,
+         var queries = component.queryItems else {
+         return nil
+         }
+         
+         // TODO: - Remove unecessary params
+         let urlString = queries.reduce("") { text, query in "\(text)-\(query.name)-\(query.value!)"}.replacingOccurrences(of: " ", with: "-")
+         //          print("**🔥**", #function, urlString)
+         //file += urlString*/
         return file
     }
     
     private  func getJson(from file: String) -> Data? {
-        let bundle = Bundle(for: type(of: self))        
+        let bundle = Bundle(for: type(of: self))
         guard let path = bundle.path(forResource: file, ofType: ".json") else {
             return nil
         }

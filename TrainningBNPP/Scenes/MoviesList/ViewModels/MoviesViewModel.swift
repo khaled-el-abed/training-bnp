@@ -12,23 +12,19 @@ import RxSwift
 final class MoviesViewModel: GenericTableViewModel<MovieViewModel>, MovieServiceProvider {
     
     // MARK: - Public Properties
-    
-    let disposeBag: DisposeBag = DisposeBag()
-    
+
     struct Input {
         var name: BehaviorRelay<String?>
         let selectedMovie: BehaviorRelay<MovieViewModel?>
     }
-    
-    struct Output {
-        
-    }
-    
+
     let input: Input
 
     var movies: Driver<[MovieViewModel]> {
         dataSource.asDriver()
     }
+
+    let disposeBag: DisposeBag = DisposeBag()
     
     // MARK: - Initialization
     
@@ -40,9 +36,6 @@ final class MoviesViewModel: GenericTableViewModel<MovieViewModel>, MovieService
         super.init()
         
         setupBinding()
-        
-        
-        
     }
 
     // MARK: - Private Functions
@@ -54,8 +47,6 @@ final class MoviesViewModel: GenericTableViewModel<MovieViewModel>, MovieService
     }
     
     private func fetchMovie(with name: String) {
-
-        print("**🔥**", type(of: self), #function, type(of: movieService))
         isLoading.accept(true)
          movieService.fetchMovie(by: name) { [weak self] response in
             
@@ -63,13 +54,10 @@ final class MoviesViewModel: GenericTableViewModel<MovieViewModel>, MovieService
             switch response {
             case .success(let movieResponse):
                 let results = movieResponse.results?.map { MovieViewModel(movie: $0) }
-                //print("**🔥**", type(of: self), #function,"result count", results?.count)
-                
                 self?.dataSource.accept(results ?? [] )
             case .failure(let error):
                 self?.hasError.accept(error)
             }
-            
         }
     }
     
