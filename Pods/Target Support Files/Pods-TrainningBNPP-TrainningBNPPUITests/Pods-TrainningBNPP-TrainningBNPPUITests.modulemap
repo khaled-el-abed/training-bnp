@@ -1,0 +1,6 @@
+framework module Pods_TrainningBNPP_TrainningBNPPUITests {
+  umbrella header "Pods-TrainningBNPP-TrainningBNPPUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

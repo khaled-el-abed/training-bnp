@@ -1,0 +1,18 @@
+disabled_rules: # rule identifiers to exclude from running
+  # - colon
+  - comma
+  # - control_statement
+  - identifier_name
+  - force_cast
+  - large_tuple
+  - notification_center_detachment
+  - nesting
+  - function_parameter_count
+  - trailing_whitespace
+  - line_length
+opt_in_rules: # some rules are only opt-in
+  - empty_count
+
+excluded:
+  - Pods
+  - ${PWD}/Pods
